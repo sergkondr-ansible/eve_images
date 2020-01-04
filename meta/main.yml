@@ -1,0 +1,10 @@
+---
+
+galaxy_info:
+  author: Sergey Kondrashov <s@kondrashov.me>
+  description: Manage eve images
+  min_ansible_version: 2.2
+  platforms:
+  - name: Ubuntu
+    versions:
+      - xenial
