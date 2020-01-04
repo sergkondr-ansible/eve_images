@@ -1,0 +1,4 @@
+---
+
+- name: eve fix permissions
+  command: /opt/unetlab/wrappers/unl_wrapper -a fixpermissions

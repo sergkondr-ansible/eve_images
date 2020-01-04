@@ -1,0 +1,44 @@
+---
+
+- name: Add Cisco IOL images
+  get_url:
+    url: "{{ eve_default_url_s3 }}/{{ item }}"
+    dest: "{{ eve_images_iol_images_dir }}"
+    mode: '0644'
+  with_items:
+  - "{{ eve_images_iol }}"
+  notify: eve fix permissions
+
+- name: Ensure there is no license
+  stat:
+    path: "{{ eve_images_iol_license_key_path }}"
+  register: license_path_stat
+  changed_when: no
+
+- name: Copy IOL keygen to remote host
+  copy:
+    src: iol.py
+    dest: "{{ eve_images_iol_keygen_path }}/iol.py"
+    mode: 0755
+  when: license_path_stat.stat.exists == False
+
+- name: Generate IOL license key
+  shell: "{{ eve_images_iol_keygen_path }}/iol.py >> {{ eve_images_iol_license_key_path }}"
+  when: license_path_stat.stat.exists == False
+
+- name: Create dirs for QEMU images
+  file:
+    path: "{{ eve_images_qemu_dir }}/{{ item.split('/')[0] }}"
+    state: directory
+    mode: 0755
+  with_items: 
+  - "{{ eve_images_qemu }}"
+
+- name: Add QEMU images
+  get_url:
+    url: "{{ eve_default_url_s3 }}/{{ item }}"
+    dest: "{{ eve_images_qemu_dir }}/{{ item.split('/')[0] }}"
+    mode: '0644'
+  with_items:
+  - "{{ eve_images_qemu }}"
+  notify: eve fix permissions

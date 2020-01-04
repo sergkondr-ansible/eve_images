@@ -1,0 +1,11 @@
+---
+
+eve_default_url_s3: ""
+
+eve_images_iol_license_key_path: "/opt/unetlab/addons/iol/bin/iourc"
+eve_images_iol_keygen_path: "/root/scripts"
+eve_images_iol_images_dir: "/opt/unetlab/addons/iol/bin/"
+eve_images_qemu_dir: "/opt/unetlab/addons/qemu/"
+
+eve_images_iol: []
+eve_images_qemu: []
