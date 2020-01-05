@@ -28,17 +28,21 @@
 
 - name: Create dirs for QEMU images
   file:
-    path: "{{ eve_images_qemu_dir }}/{{ item.split('/')[0] }}"
+    path: "{{ eve_images_qemu_dir }}/{{ item }}"
     state: directory
     mode: 0755
   with_items: 
   - "{{ eve_images_qemu }}"
+  notify: eve fix permissions
 
 - name: Add QEMU images
   get_url:
-    url: "{{ eve_default_url_s3 }}/{{ item }}"
-    dest: "{{ eve_images_qemu_dir }}/{{ item.split('/')[0] }}"
+    url: "{{ eve_default_url_s3 }}/{{ item }}/{{ eve_images_qemu_filename }}"
+    dest: "{{ eve_images_qemu_dir }}/{{ item }}"
     mode: '0644'
   with_items:
   - "{{ eve_images_qemu }}"
   notify: eve fix permissions
+
+- name: Force handlers to run
+  meta: flush_handlers

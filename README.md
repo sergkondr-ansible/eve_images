@@ -19,5 +19,5 @@ eve_images_iol:
 - "iol/L3-ADVENTERPRISEK9-M-15.4-2T.bin"
 
 eve_images_qemu:
-- "mikrotik-6.46.1/hda.qcow2"
+- "mikrotik-6.46.1"
 ```

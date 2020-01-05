@@ -7,5 +7,7 @@ eve_images_iol_keygen_path: "/root/scripts"
 eve_images_iol_images_dir: "/opt/unetlab/addons/iol/bin/"
 eve_images_qemu_dir: "/opt/unetlab/addons/qemu/"
 
+eve_images_qemu_filename: "hda.qcow2"
+
 eve_images_iol: []
 eve_images_qemu: []
